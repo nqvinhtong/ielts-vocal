@@ -27,12 +27,14 @@ public class VocalController {
     @Autowired
     private ModelFactory modleFactory;
 
-    @RequestMapping(value = "/searchs/vocals", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @RequestMapping(value = "/search/vocals", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity searchVocal() {
         logger.info("========== Start search vocal ==========");
         ResponseEntity responseEntity = null;
-        List<VocalEntity> vocalEntityList = vocalService.searchVocal(null);
-        responseEntity = modleFactory.success(vocalEntityList, List.class);
+        List<VocalDTO> vocalDTOs = vocalService.searchVocal(null);
+
+        List<VocalModel> models = VocalControllerConverter.buildVocalsResponse(vocalDTOs);
+        responseEntity = modleFactory.success(models, List.class);
         logger.info("========== End search vocal ==========");
         return responseEntity;
     }
@@ -41,8 +43,11 @@ public class VocalController {
     public ResponseEntity getVocal(@PathVariable(value = "vocal_id") Long vocalId) {
         logger.info("========== Start get vocal ==========");
         ResponseEntity responseEntity = null;
-        VocalEntity vocalEntity = vocalService.findVocalByVocalId(vocalId);
-        responseEntity = modleFactory.success(vocalEntity, VocalEntity.class);
+        VocalDTO vocalDTO = vocalService.findVocalByVocalId(vocalId);
+        VocalModel model = VocalControllerConverter.buildVocalResponse(vocalDTO);
+
+        logger.info("model: " + model.getImageUrl());
+        responseEntity = modleFactory.success(model, VocalModel.class);
         logger.info("========== End get vocal ==========");
         return responseEntity;
     }

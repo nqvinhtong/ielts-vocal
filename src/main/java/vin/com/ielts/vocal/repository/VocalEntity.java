@@ -24,8 +24,14 @@ public class VocalEntity {
     @Column(name = "pronounciation")
     private String pronounciation;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     @Column(name = "image")
     private Blob image;
+
+    @Column(name = "sound_url")
+    private String soundUrl;
 
     @Column(name = "sound")
     private Blob sound;
@@ -84,5 +90,21 @@ public class VocalEntity {
 
     public void setSound(Blob sound) {
         this.sound = sound;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSoundUrl() {
+        return soundUrl;
+    }
+
+    public void setSoundUrl(String soundUrl) {
+        this.soundUrl = soundUrl;
     }
 }

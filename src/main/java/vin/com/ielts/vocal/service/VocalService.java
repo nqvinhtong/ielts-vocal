@@ -18,17 +18,24 @@ public class VocalService {
     @Autowired
     private VocalRepository vocalRepository;
 
-    public VocalEntity findVocalByVocalId(Long vocalId){
+    public VocalDTO findVocalByVocalId(Long vocalId){
         logger.info("Finding Vocabulary by vocal id [{}]", vocalId);
         VocalEntity vocalEntity = vocalRepository.findOne(vocalId);
-        return vocalEntity;
+
+        logger.info("vocals: " + vocalEntity.getImageUrl());
+        VocalDTO vocalDTO = VocalServiceConverter.buildVocalDTO(vocalEntity);
+
+        logger.info("vocals: " + vocalDTO.getImageUrl());
+        return vocalDTO;
     }
 
-    public List<VocalEntity> searchVocal(String vocalName) {
+    public List<VocalDTO> searchVocal(String vocalName) {
         logger.info("Searching ticket in database");
-        List<VocalEntity> ticketEntityList = vocalRepository.findAll();
-        logger.info("Found [{}] tickets", ticketEntityList.size());
-        return ticketEntityList;
+        List<VocalEntity> vocalEntities = vocalRepository.findAll();
+        logger.info("Found [{}] tickets", vocalEntities.size());
+
+        List<VocalDTO> vocalDTOS = VocalServiceConverter.buildVocalDTOs(vocalEntities);
+        return vocalDTOS;
     }
 
     public VocalDTO createVocal(VocalDTO dto) {

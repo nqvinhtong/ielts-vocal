@@ -28,6 +28,12 @@ public class VocalModel implements Serializable {
     @JsonProperty("sound")
     private Blob sound;
 
+    @JsonProperty("image_url")
+    private String imageUrl;
+
+    @JsonProperty("sound_url")
+    private String soundUrl;
+
     public Long getVocalId() {
         return vocalId;
     }
@@ -82,5 +88,21 @@ public class VocalModel implements Serializable {
 
     public void setSound(Blob sound) {
         this.sound = sound;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSoundUrl() {
+        return soundUrl;
+    }
+
+    public void setSoundUrl(String soundUrl) {
+        this.soundUrl = soundUrl;
     }
 }

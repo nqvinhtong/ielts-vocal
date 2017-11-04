@@ -19,6 +19,10 @@ public class VocalDTO implements Serializable{
 
     private Blob sound;
 
+    private String imageUrl;
+
+    private String soundUrl;
+
     public Long getVocalId() {
         return vocalId;
     }
@@ -73,5 +77,21 @@ public class VocalDTO implements Serializable{
 
     public void setSound(Blob sound) {
         this.sound = sound;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSoundUrl() {
+        return soundUrl;
+    }
+
+    public void setSoundUrl(String soundUrl) {
+        this.soundUrl = soundUrl;
     }
 }
